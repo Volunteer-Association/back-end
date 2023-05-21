@@ -22,7 +22,7 @@ export default defineConfig({
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
-  base: "./",
+  base: process.env.NODE_ENV === "production" ? "./" : "/",
   server: {
     port: 3000,
     host: "0.0.0.0",
@@ -47,6 +47,5 @@ export default defineConfig({
     outDir: "dist",
     minify: true,
     sourcemap: true,
-    rollupOptions: {},
   },
 });
