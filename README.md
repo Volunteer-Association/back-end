@@ -40,6 +40,7 @@
 
 ## 目录结构说明
 ```
+├─.github
 ├─.idea
 ├─back-end-backend             // Java后端
     ├─back-end-api             // 主工程项目

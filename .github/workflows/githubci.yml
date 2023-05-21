@@ -11,6 +11,7 @@ on:
   workflow_dispatch:
 # 工作流运行由一个或多个可以按顺序或并行运行的作业组成
 jobs:
+  # 此工作流包含一个名为“initialization”的单个作业
   initialization:
     runs-on: ubuntu-latest
     steps:
@@ -20,17 +21,24 @@ jobs:
       - name: build
         run: cd ./back-end-frontend/ && npm run build
       # 部署远程服务器
-      # - name: ssh scp ssh pipelines
-      #   uses: cross-the-world/ssh-scp-ssh-pipelines@latest
-      #   env:
-      #     WELCOME: "ssh scp ssh pipelines"
-      #     LASTSSH: "Doing something after copying"
-      #   with:
-      #     host: ${{ secrets.USER_HOST }} # 服务器的ip
-      #     user: ${{ secrets.USER_NAME }} # 服务器的账号
-      #     pass: ${{ secrets.LDD_SERVER_PASSWORD }} # 服务器的密码
-      #     connect_timeout: 10s
-      #     scp: ./back-end-frontend/dist => /home/lenovo
+      - name: ssh scp ssh pipelines
+        uses: cross-the-world/ssh-scp-ssh-pipelines@latest
+        env:
+          WELCOME: "ssh scp ssh pipelines"
+          LASTSSH: "Doing something after copying"
+        with:
+          host: ${{ secrets.USER_HOST }} # 服务器的ip
+          user: ${{ secrets.USER_NAME }} # 服务器的账号
+          pass: ${{ secrets.LDD_SERVER_PASSWORD }} # 服务器的密码
+          connect_timeout: 10s
+          # 这部分是在服务器上，传输文件前执行的命令，关闭并删除运行中的旧版本
+          first_ssh: sudo rm -rf /home/lenovo/dist
+          scp: ./back-end-frontend/dist => /home/lenovo
+          # 这部分是在服务器上，传输文件后执行的命令，新版本重新安装依赖并运行
+          last_ssh: |
+            sudo cp -r /home/lenovo/dist /opt/frontend
+            sudo service nginx stop
+            sudo service nginx start
   # # 此工作流包含一个名为“build”的单个作业
   # build:
   #   # 工作将运行的跑步者的类型
