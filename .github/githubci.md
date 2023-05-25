@@ -8,3 +8,5 @@
 - github 账号密码
 ## 操作文件目录
 - 流程
+> initialization部署前端
+> build部署后端
