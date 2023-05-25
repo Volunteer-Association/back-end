@@ -82,7 +82,7 @@ jobs:
           # yarn
           # pm2 start ./dist/main.js
           last_ssh: |
-            mv /home/lenovo/server/back-end-backend /home/lenovo/server/backEnd
+            mv /home/lenovo/server/pkg/back-end-backend /home/lenovo/server/backEnd
             chmod 754 /home/lenovo/server/backEnd
             sudo service nginx stop
             sudo service nginx start
