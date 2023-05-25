@@ -6,6 +6,7 @@ dist
 node_modules
 .DS_Store
 dist
+pkg
 dist-ssr
 coverage
 *.local

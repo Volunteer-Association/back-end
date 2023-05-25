@@ -7,6 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "nest build",
+    "build:pkg": "pkg . -t node16-linux-x64 --out-path=pkg",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
@@ -18,6 +19,15 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json"
+  },
+  "bin": "./dist/src/main.js",
+  "pkg": {
+    "scripts": ["dist/config/**/*.js", "dist/mysql/**/*.js"],
+    "assets": ["public/**/*"],
+    "targets": [
+      "node16-linux-x64"
+    ],
+    "outputPath": "pkg"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
