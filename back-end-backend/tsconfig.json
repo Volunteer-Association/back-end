@@ -1,17 +1,16 @@
 {
   "compilerOptions": {
     "outDir": "./dist",
-    "target": "es2017",
-    "module": "commonjs",
-    "lib": [
-      "ESNext"
-    ],
+    "target": "ESNext",
+    "module": "CommonJS",
+    "lib": ["ESNext", "DOM"],
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "baseUrl": "./",
+    "types": ["jest", "node"],
     "sourceMap": true,
     "incremental": true,
     "skipLibCheck": true,
@@ -21,8 +20,9 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*", "onfig/*", "mysql/*"]
     }
   },
-  "exclude": ["node_modules", "test", "dist", "**/*spec.ts"]
+  "include": ["src/**/*.ts", "test/**/*.ts"],
+  "exclude": ["node_modules", "test", "dist", "test/**/*.ts"]
 }

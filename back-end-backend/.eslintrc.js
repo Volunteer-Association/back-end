@@ -9,6 +9,7 @@ module.exports = {
   extends: [
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
+    '<tsconfigRootDir>/test/app.e2e-spec.ts',
   ],
   root: true,
   env: {

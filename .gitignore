@@ -1,8 +1,6 @@
-### 后端 Java ###
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+### 后端 nestjs ###
+node_modules
+dist
 
 ### 前端 Vue ###
 node_modules
