@@ -1,0 +1,66 @@
+.login {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+}
+
+.content_left {
+  flex: 1;
+}
+
+.content_centre {
+  position: absolute;
+  left: 30px;
+  bottom: 30px;
+  color: white;
+  text-shadow: 0 0 10px black;
+  .upper {
+    font-weight: bold;
+    font-size: 18px;
+  }
+  .centre{
+    margin-top: 5px;
+  }
+}
+
+.content_right{
+  width: 400px;
+  background-color: white;
+
+  .right_main {
+    text-align: center;
+    margin: 0 20px;
+  }
+  // 标题
+  .right_title {
+    margin-top: 130px;
+    .title_upper{
+      font-size: 25px;
+      font-weight: bold;
+    }
+    .title_lower{
+      font-size: 14px;
+      color: grey;
+    }
+  }
+  // 文本输入
+  .right_form{
+    margin-top: 50px;
+
+    .form_pass {
+      margin-top: 10px;
+    }
+  }
+  // 操作
+  .right_trigger {
+    margin-top: 5px;
+    .trigger_l {
+      text-align: left;
+    }
+    .trigger_r {
+      text-align: right;
+    }
+  }
+
+}

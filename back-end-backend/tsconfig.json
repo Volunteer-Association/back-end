@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",
+    "target": "ESNext",
+    "module": "CommonJS",
+    "lib": ["ESNext", "DOM"],
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
+    "types": ["jest", "node"],
+    "sourceMap": true,
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@/*": ["src/*", "onfig/*", "mysql/*"]
+    }
+  },
+  "include": ["src/**/*.ts", "test/**/*.ts"],
+  "exclude": ["node_modules", "test", "dist", "test/**/*.ts"]
+}
