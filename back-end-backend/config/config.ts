@@ -2,7 +2,7 @@
  * @Author: chenguihui
  * @Date: 2023-05-26 00:56:39
  * @LastEditors: chenguihui
- * @LastEditTime: 2023-05-26 02:08:29
+ * @LastEditTime: 2023-05-26 15:07:41
  * @Description: 服务的配置信息
  * @filePath: Do not edit
  */
@@ -12,6 +12,8 @@ const os = require("os");
 const IP = os.networkInterfaces();
 // 调用获取IP函数
 const getIP = getosIP();
+/** 判断是否开发环境 */
+const isEnvDevelopment = process.env.NODE_ENV !== "development";
 
 /** 配置信息 */
 const Config = {
@@ -32,13 +34,13 @@ const Config = {
     // 数据库名字
     database: "backstage",
     // 用户名
-    username: "lenovo",
+    username: isEnvDevelopment ? "lenovo" : "back-end",
     // 登录密码
-    password: "chen2020.",
+    password: isEnvDevelopment ? "chen2020." : "back-end2023.",
     // 数据库地址
     host: "localhost",
     // 数据库端口
-    port: 3306,
+    port: isEnvDevelopment ? 3306 : 33016,
     // 数据库类型
     dialect: "mysql",
     // 时区

@@ -24,11 +24,11 @@ export default defineConfig({
   },
   base: process.env.NODE_ENV === "production" ? "./" : "/",
   server: {
-    port: 3000,
+    port: 8000,
     host: "0.0.0.0",
     proxy: {
       "/api/": {
-        target: "http://localhost:8001",
+        target: "http://localhost:3000",
         changeOrigin: true,
         configure: (proxy, options) => {
           console.log(proxy, options);
