@@ -23,37 +23,59 @@
 ### 项目启动
 1. 确保本地安装了nodejs
 2. 打开终端进入back-end-frontend
-    > 执行 npm run dev
+   ```
+   # 安装依赖
+   npm run install
+
+   # 启动项目
+   npm run dev
+   ```
+3. 
 
 ## 后端
-> Spring-Boot
+> nodejs nestjs
 ### 项目启动
-1. 确保本地安装idea 开发工具
-2. 使用idea自带的Maven3 ，通过idea打开back-end
-3. 通过idea执行back-end-backend目录下的back-end-api目录下 src/java/com/example/api/BackEndApiApplication文件
+1. 打开终端进入back-end-backend
+   ```
+   #安装依赖执行
+   yarn install
+
+   # 启动项目执行
+   yarn start 或者 yarn start:dev
+   ```
+2. 
 
 ## 参与贡献
 1.  Fork 本仓库
 2.  新建 Feat_xxx 分支
 3.  提交代码
-4.  新建 Pull Request
+4.  新建 Pull Request，合并到develop分支上
+5.  等待作者合并
+6. <span style="color: red">注意事项：</span> 如果是github用户，请不要建立Pull Request，请联系作者并等待作者拉取合并
 
 ## 目录结构说明
 ```
 ├─.github
 ├─.idea
-├─back-end-backend             // Java后端
-    ├─back-end-api             // 主工程项目
-        ├─src
-        ├─.gitigonre
-        └─pom.xml              // 子工程配置(依赖)
-    ├─back-end-service
-        ├─src
-        ├─.gitigonre
-        └─pom.xml
+├─back-end-backend              // nestjs后端
+    ├─config                    // 服务端配置目录             
+    ├─mysql                     // 数据库链接目录
+    ├─public                    // 静态资源目录
+    ├─src                       // 主工程目录
+      ├─app.controller.ts
+      ├─app.module.ts
+      ├─app.service.ts
+      └─main.ts                 // 主入口文件
+    ├─test                      // 工程测试目录
+    ├─.eslintrc.js
     ├─.gitigonre
-    ├─pom.xml                   // 父工程配置
-    └─README.md
+    ├─.prettierrc
+    ├─.jsconfig.json
+    ├─nest-cli.json            // nest CLI配置文件
+    ├─package.json
+    ├─README.md
+    ├─tsconfig.json            // typescript配置文件
+    └─yarn.lock
 ├─back-end-frontend            // Vue前端
     ├─public                        
     ├─src                           // 主工程目录
