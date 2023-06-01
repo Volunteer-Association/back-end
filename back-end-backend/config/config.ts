@@ -2,7 +2,7 @@
  * @Author: chenguihui
  * @Date: 2023-05-26 00:56:39
  * @LastEditors: chenguihui
- * @LastEditTime: 2023-05-26 15:07:41
+ * @LastEditTime: 2023-06-01 13:40:45
  * @Description: 服务的配置信息
  * @filePath: Do not edit
  */
@@ -13,7 +13,7 @@ const IP = os.networkInterfaces();
 // 调用获取IP函数
 const getIP = getosIP();
 /** 判断是否开发环境 */
-const isEnvDevelopment = process.env.NODE_ENV !== "development";
+const isEnvDevelopment = process.env.NODE_ENV == "development";
 
 /** 配置信息 */
 const Config = {

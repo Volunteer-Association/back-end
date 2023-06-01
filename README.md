@@ -35,7 +35,8 @@
 ## 后端
 > nodejs nestjs
 ### 项目启动
-1. 打开终端进入back-end-backend
+1. 修改config目录下的config.ts配置文件, 修改数据库配置
+2. 打开终端进入back-end-backend
    ```
    #安装依赖执行
    yarn install
@@ -43,7 +44,7 @@
    # 启动项目执行
    yarn start 或者 yarn start:dev
    ```
-2. 
+3. 
 
 ## 参与贡献
 1.  Fork 本仓库
@@ -58,6 +59,7 @@
 ├─.github
 ├─.idea
 ├─back-end-backend              // nestjs后端
+    ├─bin
     ├─config                    // 服务端配置目录             
     ├─mysql                     // 数据库链接目录
     ├─public                    // 静态资源目录
