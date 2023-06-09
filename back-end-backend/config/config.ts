@@ -57,7 +57,7 @@ const Config = {
     // 用户名，发件地址
     user: 'shaft.feather@foxmail.com',
     // 授权码
-    pass: 'goquadrfgciwdjef',
+    pass: '',
     // 验证码有效时间, 单位：毫秒
     expires: 5 * 60 * 1000,
   },

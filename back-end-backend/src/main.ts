@@ -14,6 +14,8 @@ import Config from '../config/config';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
+	// 配置允许跨域
+	app.enableCors();
   app.useStaticAssets(join(__dirname, '..', 'public'), {
     prefix: Config.serverOptions.baseUrl, //设置虚拟路径
   });
