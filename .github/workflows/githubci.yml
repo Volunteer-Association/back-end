@@ -77,12 +77,14 @@ jobs:
             sudo rm -rf /home/lenovo/server
           scp: |
             ./back-end-backend/pkg => /home/lenovo/server
+            ./back-end-backend/bin => /home/lenovo/server
           # last_ssh: | #这部分是在服务器上，传输文件后执行的命令，新版本重新安装依赖并运行
           # cd /project/ldd-rms-backend
           # yarn
           # pm2 start ./dist/main.js
           last_ssh: |
             mv /home/lenovo/server/pkg/back-end-backend /home/lenovo/server/backEnd
+            sudo rm -rf /home/lenovo/server/pkg
             chmod 754 /home/lenovo/server/backEnd
             sudo service nginx stop
             sudo service nginx start

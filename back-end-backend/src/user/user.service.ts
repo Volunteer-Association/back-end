@@ -17,6 +17,13 @@ export class UserService {
   }
 
   findAll() {
+    const username = ''
+    const password = ''
+
+    function ducan(a: number, b: number) {
+      return a + b
+    }
+
     return `This action returns all user`;
   }
 

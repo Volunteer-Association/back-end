@@ -13,7 +13,9 @@ import { join } from 'path';
 import Config from '../config/config';
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+    logger: ['error', 'debug', 'log', 'warn']
+  });
 	// 配置允许跨域
 	app.enableCors();
   app.useStaticAssets(join(__dirname, '..', 'public'), {

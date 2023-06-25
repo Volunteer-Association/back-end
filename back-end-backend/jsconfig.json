@@ -3,7 +3,7 @@
     "outDir": "./dist",
     "target": "ESNext",
     "module": "ESNext",
-    "jsx": "preserve",
+    "jsx": "react",
     "moduleResolution": "Node",
     "strictNullChecks": true,
     "strictFunctionTypes": true,
@@ -15,9 +15,9 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*", "config/*", "mysql/*"]
     }
   },
-  "include": ["src/**/*.ts", "test/**/*.ts"],
+  "include": ["src/**/*.ts", "config/**/*.ts", "mysql/**/.ts", "test/**/*.ts"],
   "exclude": ["node_modules", "**/node_modules/*"]
 }

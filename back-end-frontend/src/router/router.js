@@ -27,6 +27,11 @@ const routes = [
     component: HomeView,
   },
   {
+    path: "/upload",
+    name: "upload",
+    component: () => import("@/pages/uploadFile/UploadFile.vue"),
+  },
+  {
     path: "/about",
     name: "about",
     component: () => import("@/pages/about/About.vue"),
