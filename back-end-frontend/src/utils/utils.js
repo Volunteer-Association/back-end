@@ -6,3 +6,11 @@
  * @Description: 工具库
  * @filePath: Do not edit
  */
+
+class Utile {
+  constructor() {
+
+  }
+}
+
+export default Utile;

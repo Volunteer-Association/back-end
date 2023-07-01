@@ -1,3 +1,11 @@
+/*
+ * @Author: chenguihui
+ * @Date: 2023-06-01 11:10:12
+ * @LastEditors: chenguihui
+ * @LastEditTime: 2023-07-02 05:14:51
+ * @Description: 
+ * @filePath: Do not edit
+ */
 import { fileURLToPath, URL } from "node:url";
 
 import { defineConfig } from "vite";
