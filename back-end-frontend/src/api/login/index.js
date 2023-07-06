@@ -16,3 +16,11 @@ export const login = (data) => {
     data
   })
 }
+
+export const getSystem = (data) => {
+  return request({
+    method: "GET",
+    url: "/system",
+    data
+  })
+}

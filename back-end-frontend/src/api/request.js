@@ -2,7 +2,7 @@
  * @Author: chenguihui
  * @Date: 2023-05-21 11:40:10
  * @LastEditors: chenguihui
- * @LastEditTime: 2023-06-30 13:28:30
+ * @LastEditTime: 2023-07-06 10:39:16
  * @Description: 请求依赖库
  * @filePath: Do not edit
  */
@@ -26,6 +26,15 @@ request.interceptors.request.use((config) => {
   // const { user } = store
   config.headers = {
     "Content-Type": "application/x-www-form-urlencoded"
+  }
+  // 判断是否get请求，处理参数
+  if ((config.method == "get" || config.method == "GET") && config.data) {
+    // 参数序列号
+    let strObj = "";
+    for (let key in config.data) {
+      strObj += `${key}=${config.data[key]}&`;
+    }
+    config.url = config.url + `?${strObj.slice(0, -1)}`;
   }
   return config;
 });

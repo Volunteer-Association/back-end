@@ -3,12 +3,10 @@
     "outDir": "./dist",
     "target": "ESNext",
     "module": "ESNext",
-    "jsx": "react",
     "moduleResolution": "Node",
     "strictNullChecks": true,
     "strictFunctionTypes": true,
     "baseUrl": ".",
-    "types": ["jest", "node"],
     "incremental": true,
     "skipLibCheck": true,
     "noImplicitAny": false,
@@ -17,7 +15,5 @@
     "paths": {
       "@/*": ["src/*"]
     }
-  },
-  "include": ["src/**/*.ts", "test/**/*.ts"],
-  "exclude": ["node_modules", "**/node_modules/*"]
+  }
 }

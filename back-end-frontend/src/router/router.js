@@ -6,18 +6,18 @@
  * @Description: 路由路径
  * @filePath: Do not edit
  */
-import HomeView from "@/pages/home/Home.vue";
+import HomeView from "@/views/home/Home.vue";
 
 const routes = [
   {
     path: "/login",
     name: "login",
-    component: () => import("@/pages/auth/login/Login.vue"),
+    component: () => import("@/views/auth/login/Login.vue"),
     children: [
       {
         path: "/register",
         name: "register",
-        component: () => import("@/pages/auth/register/Register.vue")
+        component: () => import("@/views/auth/register/Register.vue")
       }
     ]
   },
@@ -29,12 +29,12 @@ const routes = [
   {
     path: "/upload",
     name: "upload",
-    component: () => import("@/pages/uploadFile/UploadFile.vue"),
+    component: () => import("@/views/uploadFile/UploadFile.vue"),
   },
   {
     path: "/about",
     name: "about",
-    component: () => import("@/pages/about/About.vue"),
+    component: () => import("@/views/about/About.vue"),
   },
 ];
 
