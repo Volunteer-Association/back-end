@@ -1,26 +1,18 @@
+/*
+ * @Author: chenguihui
+ * @Date: 2023-07-06 11:42:20
+ * @LastEditors: chenguihui
+ * @LastEditTime: 2023-07-08 05:52:12
+ * @Description: 头部注释
+ * @filePath: Do not edit
+ */
 import { Injectable } from '@nestjs/common';
 import { CreateLoginDto } from './dto/create-login.dto';
-import { UpdateLoginDto } from './dto/update-login.dto';
 
 @Injectable()
 export class LoginService {
   create(createLoginDto: CreateLoginDto) {
+    console.log(createLoginDto)
     return 'This action adds a new login';
-  }
-
-  findAll() {
-    return `This action returns all login`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} login`;
-  }
-
-  update(id: number, updateLoginDto: UpdateLoginDto) {
-    return `This action updates a #${id} login`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} login`;
   }
 }
