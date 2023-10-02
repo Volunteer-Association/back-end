@@ -33,6 +33,7 @@
     "outputPath": "pkg"
   },
   "dependencies": {
+    "@nestjs/axios": "^3.0.0",
     "@nestjs/common": "^10.2.3",
     "@nestjs/config": "^3.0.0",
     "@nestjs/core": "^10.2.3",
@@ -40,6 +41,7 @@
     "@nestjs/platform-express": "^10.2.3",
     "@nestjs/swagger": "^7.1.10",
     "@nestjs/typeorm": "^10.0.0",
+    "axios": "^1.5.0",
     "mysql2": "^3.6.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",

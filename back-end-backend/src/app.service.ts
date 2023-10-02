@@ -14,7 +14,7 @@ import { Parameter, SystemResource } from './create-app.dto';
 @Injectable()
 export class AppService {
   private CalculateByteConversion: (num: number, Bytecodes?: string) => number;
-  private UploadFile: (file: string, data: Array<any>) => void;
+  private UploadFile: (file: string, data: Array<number>) => string;
   constructor() {
     this.CalculateByteConversion = function (num: number, Bytecodes?: string) {
       let strNuber = 0;
@@ -35,20 +35,23 @@ export class AppService {
       return strNuber;
     };
 
-    this.UploadFile =  function (utl: string, data: Array<any>) {
-      try{
-        fs.mkdir(utl, (event) => {
-          console.log(event)
-        })
-      } catch (err) {
-
-      }
-    }
-
+    this.UploadFile = function (utl: string, data: Array<number>) {
+      if (!fs.existsSync(utl)) {
+        try {
+          fs.mkdirSync(utl);
+          console.log('文件夹创建成功');
+        } catch (err) {
+          console.log('文件夹创建失败', err);
+        }
+      } 
+      
+      console.log(data);
+      return '文件夹创建成功';
+    };
   }
 
   getHello(): string {
-    this.UploadFile("./upload", [1])
+    this.UploadFile('./upload', [1]);
     return 'Hello World!';
   }
 
@@ -65,7 +68,7 @@ export class AppService {
       const cpuInfo = os.cpus(); // 获取系统中所有 CPU 的信息
       let totalIdle = 0;
       let totalTick = 0;
-    
+
       for (let i = 0, len = cpuInfo.length; i < len; i++) {
         const cpu = cpuInfo[i];
         for (let type in cpu.times) {
@@ -73,20 +76,27 @@ export class AppService {
         }
         totalIdle += cpu.times.idle; // 计算 CPU 的空闲时钟周期数
       }
-    
-      return { idle: totalIdle / cpuInfo.length, total: totalTick / cpuInfo.length };
+
+      return {
+        idle: totalIdle / cpuInfo.length,
+        total: totalTick / cpuInfo.length,
+      };
     }
-    
+
     // 每秒获取一次 CPU 使用率
     setInterval(() => {
       const startMeasure = getCpuUsage(); // 获取起始时的 CPU 使用率
-    
+
       setTimeout(() => {
         const endMeasure = getCpuUsage(); // 获取结束时的 CPU 使用率
         const idleDifference = endMeasure.idle - startMeasure.idle; // 空闲周期数差值
         const totalDifference = endMeasure.total - startMeasure.total; // 总周期数差值
-        const percentageCPU = 100 - ~~(100 * idleDifference / totalDifference); // CPU 使用率百分比
-    
+        const percentageCPU =
+          100 - ~~((100 * idleDifference) / totalDifference); // CPU 使用率百分比
+
+        console.log(endMeasure)
+
+        console.log(idleDifference, totalDifference);
         console.log(`CPU使用率：${percentageCPU}%`); // 打印 CPU 使用率
       }, 1000); // 设置1秒的延迟
     }, 1000); // 每秒执行一次
@@ -153,6 +163,7 @@ export class AppService {
       ddaa12: os.type(),
       xzaa13: os.uptime(),
       iyda14: os.userInfo(),
+      ...os
       // sdas15: os.availableParallelism(),
       // udaa16: os.machine(),
       // sdfa17: os.getPriority(4504),
@@ -175,14 +186,13 @@ export class AppService {
     return '文件上传成功';
   }
 
-
   getUserAudio(value: string): string {
-    let names = fs.statSync("./public/ycccc.kgma")
+    let names = fs.statSync('./public/ycccc.kgma');
 
-    const ReadStream = fs.createReadStream("./public/ycccc.kgma")
-    const WriteStream = fs.createWriteStream("./public/ycccc.mp3");
+    const ReadStream = fs.createReadStream('./public/ycccc.kgma');
+    const WriteStream = fs.createWriteStream('./public/ycccc.mp3');
 
-    ReadStream.pipe(WriteStream)
+    ReadStream.pipe(WriteStream);
 
     // fs.readFile("./public/ycccc.kgma", (err, data) => {
     //   if (err) {
@@ -198,7 +208,6 @@ export class AppService {
     //   })
 
     // })
-    return "文件上传成功"
+    return '文件上传成功';
   }
-
 }

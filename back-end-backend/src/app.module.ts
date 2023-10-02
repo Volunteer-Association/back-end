@@ -21,7 +21,7 @@ import { RegisterModule } from './auth/register/register.module';
       isGlobal: true,
       envFilePath: ['.env', '.env.dev', '.env.prod'],
     }),
-    // Connect,
+    Connect,
     DemoModule,
     LoginModule,
     RegisterModule,

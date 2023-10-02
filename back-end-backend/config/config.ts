@@ -13,7 +13,7 @@ const IP = os.networkInterfaces();
 // 调用获取IP函数
 const getIP = getosIP();
 /** 判断是否开发环境 */
-const isEnvDevelopment = process.env.NODE_ENV == 'development';
+const isEnvDevelopment = process.env.NODE_ENV !== 'development';
 /** 配置信息 */
 const Config = {
   /** 服务配置 */
@@ -26,6 +26,19 @@ const Config = {
     baseUrl: '/static/file',
   },
   swaggerConfig: {},
+  /** 第三方授权 */
+  ThirdPartyAuthorization: {
+    /** Gitee 授权 */
+    Gitee: {
+      ClientID: "6ed4ae5d52c8d4b23c9d4019ee8f706d8b5c41ed2594fdd811c2206f74996297",
+      ClientSecret: "bf956e0eca3b944f97df64188bef05a02e3cea40687a72c7be7574b8a13db3dd"
+    },
+    /** Github 授权 */
+    Github: {
+      ClientID: "25b074e434c72b7c37b8",
+      ClientSecret: "df280c6bf1b3a0c258e943201fec51b6dcfc8964"
+    }
+  },
   /** 数据库配置 */
   mysqlOptions: {
     // 数据库名字

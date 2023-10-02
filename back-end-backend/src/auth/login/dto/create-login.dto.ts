@@ -17,4 +17,16 @@ export class CreateLoginDto {
 
   @ApiProperty({ required: false, default: false })
   remember: boolean;
+
+  @ApiProperty({ required: false, default: '' })
+  code: string;
+}
+
+export class GiteeAuthorizedDto {
+  access_token?: string;
+  token_type?: string;
+  expires_in?: string;
+  refresh_token?: string;
+  scope?: string;
+  created_at?: string
 }
