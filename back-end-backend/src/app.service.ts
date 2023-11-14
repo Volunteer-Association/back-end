@@ -15,6 +15,7 @@ import { Parameter, SystemResource } from './create-app.dto';
 export class AppService {
   private CalculateByteConversion: (num: number, Bytecodes?: string) => number;
   private UploadFile: (file: string, data: Array<number>) => string;
+  num: number;
   constructor() {
     this.CalculateByteConversion = function (num: number, Bytecodes?: string) {
       let strNuber = 0;
@@ -48,6 +49,8 @@ export class AppService {
       console.log(data);
       return '文件夹创建成功';
     };
+    this.num = 0;
+
   }
 
   getHello(): string {
@@ -171,8 +174,10 @@ export class AppService {
   }
 
   uploadFile(files: Array<Express.Multer.File>): string {
+    console.log(files)
     files.forEach((ele) => {
-      let oldfFile = `./upload/${ele.originalname}`;
+      this.num++;
+      let oldfFile = `./upload/${this.num}.vcd`;
       try {
         fs.mkdirSync('./upload');
       } catch (err) {}

@@ -49,7 +49,7 @@ export class AppController {
   @UseInterceptors(FilesInterceptor('files'))
   @ApiOperation({ summary: '文件上传' })
   @ApiResponse({ status: 200, description: '响应体' })
-  @ApiConsumes('multipart/form-data')
+  @ApiConsumes('application/octet-stream', 'multipart/form-data')
   @ApiBody({
     description: '请选择文件',
     type: FilesUploadDto,

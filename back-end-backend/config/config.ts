@@ -7,7 +7,8 @@
  * @filePath: Do not edit
  */
 // 导入os模块
-import * as os from "node:os";
+import * as os from 'node:os';
+import * as fs from 'node:fs';
 // 获取IP
 const IP = os.networkInterfaces();
 // 调用获取IP函数
@@ -30,14 +31,16 @@ const Config = {
   ThirdPartyAuthorization: {
     /** Gitee 授权 */
     Gitee: {
-      ClientID: "6ed4ae5d52c8d4b23c9d4019ee8f706d8b5c41ed2594fdd811c2206f74996297",
-      ClientSecret: "bf956e0eca3b944f97df64188bef05a02e3cea40687a72c7be7574b8a13db3dd"
+      ClientID:
+        '6ed4ae5d52c8d4b23c9d4019ee8f706d8b5c41ed2594fdd811c2206f74996297',
+      ClientSecret:
+        'bf956e0eca3b944f97df64188bef05a02e3cea40687a72c7be7574b8a13db3dd',
     },
     /** Github 授权 */
     Github: {
-      ClientID: "25b074e434c72b7c37b8",
-      ClientSecret: "df280c6bf1b3a0c258e943201fec51b6dcfc8964"
-    }
+      ClientID: '25b074e434c72b7c37b8',
+      ClientSecret: 'df280c6bf1b3a0c258e943201fec51b6dcfc8964',
+    },
   },
   /** 数据库配置 */
   mysqlOptions: {
@@ -48,7 +51,7 @@ const Config = {
     // 登录密码
     password: isEnvDevelopment ? 'chen2020.' : 'back-end2023.',
     // 数据库地址
-    host: isEnvDevelopment ? 'localhost': 'www.chenguihui.com',
+    host: isEnvDevelopment ? 'localhost' : 'www.chenguihui.com',
     // 数据库端口
     port: isEnvDevelopment ? 3306 : 33016,
     // 数据库类型
@@ -144,6 +147,18 @@ function getosIP(): string {
     // 否则返回本第回环地址
     return '127.0.0.1';
   }
+}
+
+createAFile();
+
+
+function createAFile() {
+  fs.mkdir('../upload', (err) => {
+    console.log(err);
+  });
+  fs.writeFile('../upload/config.json', JSON.stringify(Config), (err) => {
+    console.log(err);
+  });
 }
 
 export default Config;
