@@ -18,6 +18,11 @@
   </tr>
 </table>
 
+## npm镜像设置
+* 国内相关npm镜像源
+  1. 淘宝镜像：npm config set registry https://registry.npmmirror.com/
+* 官方镜像源
+  1. npm config set registry https://registry.npmjs.org/
 ## 前端
 > Vue.js 3
 ### 项目启动
