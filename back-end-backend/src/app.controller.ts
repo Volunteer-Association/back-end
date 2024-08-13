@@ -13,7 +13,6 @@ import {
   Post,
   UseInterceptors,
   UploadedFiles,
-  Body,
 } from '@nestjs/common';
 import { AppService } from './app.service';
 import {
@@ -23,6 +22,7 @@ import {
   ApiConsumes,
   ApiResponse,
   ApiTags,
+  ApiParam,
 } from '@nestjs/swagger';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { Parameter, SystemResource, FilesUploadDto } from './create-app.dto';
@@ -41,6 +41,10 @@ export class AppController {
   @Get('system')
   @ApiOperation({ summary: "获取系统信息" })
   @ApiResponse({ status: 200, description: '响应体' })
+  @ApiParam({
+    type: Parameter,
+    name: '参数'
+  })
   getSystemResource(@Query() option: Parameter): SystemResource {
     return this.appService.getSystemResource(option);
   }

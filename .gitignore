@@ -1,6 +1,7 @@
 ### 后端 nestjs ###
 node_modules
 dist
+upload
 
 ### 前端 Vue ###
 node_modules
@@ -44,6 +45,7 @@ build/
 ### VS Code ###
 .vscode/
 .idea/
+package-lock.json
 
 ### Mac OS ###
 .DS_Store

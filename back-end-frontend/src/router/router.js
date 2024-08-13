@@ -18,6 +18,11 @@ const Routes = [
     // this generates a separate chunk (About.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import('../views/AboutView.vue')
+  },
+  {
+    path: '/ai',
+    name: 'ai',
+    component: () => import('../views/artificialIntelligence/TestAIView.vue')
   }
 ]
 export default Routes

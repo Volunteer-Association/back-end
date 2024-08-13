@@ -85,7 +85,7 @@ export class AppService {
         total: totalTick / cpuInfo.length,
       };
     }
-
+/*
     // 每秒获取一次 CPU 使用率
     setInterval(() => {
       const startMeasure = getCpuUsage(); // 获取起始时的 CPU 使用率
@@ -102,7 +102,7 @@ export class AppService {
         console.log(idleDifference, totalDifference);
         console.log(`CPU使用率：${percentageCPU}%`); // 打印 CPU 使用率
       }, 1000); // 设置1秒的延迟
-    }, 1000); // 每秒执行一次
+    }, 1000); // 每秒执行一次*/
 
     console.log(option);
 

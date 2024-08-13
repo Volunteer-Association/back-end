@@ -8,20 +8,10 @@
  */
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
-import fs from 'fs';
 import Config from '../config/config';
+import { NestExpressApplication } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-
-/** 初始化配置文件 */
-function CreatConfig() {
-  try {
-    fs.mkdirSync("./config")
-  } catch (error) {
-     
-  }
-}
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {

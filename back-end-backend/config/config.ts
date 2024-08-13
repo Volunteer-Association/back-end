@@ -13,8 +13,8 @@ import * as fs from 'node:fs';
 const IP = os.networkInterfaces();
 // 调用获取IP函数
 const getIP = getosIP();
-/** 判断是否开发环境 */
-const isEnvDevelopment = process.env.NODE_ENV !== 'development';
+/** 判断是否开发环境 */// development  development
+const isEnvDevelopment = process.env.NODE_ENV !== 'developmen'; 
 /** 配置信息 */
 const Config = {
   /** 服务配置 */
@@ -49,7 +49,7 @@ const Config = {
     // 用户名
     username: isEnvDevelopment ? 'lenovo' : 'back_end',
     // 登录密码
-    password: isEnvDevelopment ? 'chen2020.' : 'back-end2023.',
+    password: isEnvDevelopment ? 'chen20-20.' : 'back-end2023.',
     // 数据库地址
     host: isEnvDevelopment ? 'localhost' : 'www.chenguihui.com',
     // 数据库端口
@@ -147,18 +147,6 @@ function getosIP(): string {
     // 否则返回本第回环地址
     return '127.0.0.1';
   }
-}
-
-createAFile();
-
-
-function createAFile() {
-  fs.mkdir('../upload', (err) => {
-    console.log(err);
-  });
-  fs.writeFile('../upload/config.json', JSON.stringify(Config), (err) => {
-    console.log(err);
-  });
 }
 
 export default Config;
