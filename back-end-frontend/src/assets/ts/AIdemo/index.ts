@@ -1,5 +1,9 @@
 import * as TF from '@tensorflow/tfjs'
 
+export const tensorflowDemo = () => {
+  return TF;
+}
+
 export const TFJS = async () => {
   // 创建模型
   const model = TF.sequential()

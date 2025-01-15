@@ -9,6 +9,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateLoginDto, GiteeAuthorizedDto } from './dto/create-login.dto';
 
+
 @Injectable()
 export class LoginService {
 
@@ -18,6 +19,16 @@ export class LoginService {
   }
 
   GiteeAuthorized(Code: CreateLoginDto): GiteeAuthorizedDto {
+    let ducna = null as undefined;
+
+    do {
+      
+    }
+
+    while(ducna) {
+
+    }
+
     return {
 
     };

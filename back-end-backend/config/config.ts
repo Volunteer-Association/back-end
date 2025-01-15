@@ -8,7 +8,6 @@
  */
 // 导入os模块
 import * as os from 'node:os';
-import * as fs from 'node:fs';
 // 获取IP
 const IP = os.networkInterfaces();
 // 调用获取IP函数
@@ -49,7 +48,7 @@ const Config = {
     // 用户名
     username: isEnvDevelopment ? 'lenovo' : 'back_end',
     // 登录密码
-    password: isEnvDevelopment ? 'chen20-20.' : 'back-end2023.',
+    password: isEnvDevelopment ? 'chenguihui' : 'back-end2023.',
     // 数据库地址
     host: isEnvDevelopment ? 'localhost' : 'www.chenguihui.com',
     // 数据库端口

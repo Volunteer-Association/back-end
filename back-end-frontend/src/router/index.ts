@@ -18,6 +18,11 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue')
     },
     {
+      path: '/text',
+      name: 'text',
+      component: () => import('../views/TextView.vue')
+    },
+    {
       path: '/aidemo',
       name: 'aidemo',
       component: () => import('../views/AIdemoView.vue')
