@@ -15,14 +15,7 @@
 import { onMounted } from 'vue';
 import teseai from '../assets/images/aitext.jpg';
 import * as TF from '@tensorflow/tfjs'
-import { load } from 'https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@1.0.0';
-
-
-
-async function TestAIdeq() {
-    const model = await TF.mobli();
-}
-
+import { NumberController } from 'three/examples/jsm/libs/lil-gui.module.min.js';
 
 function careTalk() {
     const model = TF.sequential();
@@ -80,38 +73,65 @@ function careTalk() {
         metrics: ['accuracy'],
     });
 
-    const trainDataset = {
-        xs: TF.tensor4d(trainImages, [trainImages.length, 28, 28, 1]), // 输入图像
-        ys: TF.tensor2d(trainLabels, [trainLabels.length, 10]) // 图像对应的标签
-    };
 
-    const testDataset = {
-        xs: TF.tensor4d(testImages, [testImages.length, 28, 28, 1]), // 测试图像
-        ys: TF.tensor2d(testLabels, [testLabels.length, 10]) // 测试图像对应的标签
-    };
-
-    model.fit(trainDataset.xs, trainDataset.ys, {
-        epochs: 10, // 训练轮数
-        validationData: [testDataset.xs, testDataset.ys], // 验证数据集
-        callbacks: {
-            onEpochEnd: (epoch, logs) => {
-                console.log(`Epoch ${epoch + 1}: loss = ${logs.loss}, accuracy = ${logs.acc}`);
-            }
-        }
-    });
-
-    model.evaluate(testDataset.xs, testDataset.ys).then((result) => {
-    console.log(`Test loss: ${result[0].dataSync()[0]}`);
-    console.log(`Test accuracy: ${result[1].dataSync()[0]}`);
-});
-
-const predicted = model.predict(TF.tensor4d([newImage], [1, 28, 28, 1]));
-predicted.print();
 
 
 }
 
+class LinearModel {
+    model: TF.Sequential;
+    constructor() {
+        this.model = TF.sequential();
+    }
+
+    async loadModel(xy: number[], ys: number[]) {
+        this.model.add(
+            TF.layers.dense({
+                inputShape: [1],
+                units: 1
+            })
+        );
+
+        this.model.compile({
+            optimizer: 'sgd',
+            loss: 'meanSquaredError',
+        });
+
+        this.model.fit(TF.tensor2d(xy), TF.tensor2d(ys), {
+            epochs: 1000,
+            batchSize: 32,
+        })
+
+
+    }
+
+    predict(input: number[]) {
+        console.log(input);
+        const prediction = this.model.predict(TF.tensor2d([input], [1, input.length])); // 确保输入是一个2D数组
+        if (Array.isArray(prediction)) {
+            // 如果prediction是一个数组，遍历并同步提取每个Tensor的数据
+            return prediction.map(tensor => Array.from(tensor.dataSync()));
+        } else {
+            // 如果prediction是一个单个的Tensor
+            return prediction ? Array.from(prediction.dataSync()) : [];
+        }
+    }
+
+    async save() {
+        await this.model.save('localstorage://my-model');
+        console.log('Model saved');
+    }
+
+}
+
+
+
 onMounted(() => {
+    const linearModel = new LinearModel();
+    linearModel.loadModel([1, 2, 3, 4, 5], [1, 2, 3, 4, 5]);
+    console.log(linearModel.predict([10]));
+    linearModel.save();
+    // linearModel.save();
     // TFJS();
     // careTalk();
 })

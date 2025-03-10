@@ -13,6 +13,10 @@ import {
   Post,
   UseInterceptors,
   UploadedFiles,
+  Ip,
+  Req,
+  Session,
+  Headers,
 } from '@nestjs/common';
 import { AppService } from './app.service';
 import {
@@ -34,7 +38,11 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  getHello(): string {
+  getHello(@Ip() ip: string, @Session() session: any, @Headers() userAgent: string, @Req() req: any): string {
+    console.log(ip);
+    console.log(session);
+    console.log(userAgent);
+    console.log(req.headers);
     return this.appService.getHello();
   }
 

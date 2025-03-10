@@ -13,27 +13,42 @@ import { Parameter, SystemResource } from './create-app.dto';
 
 @Injectable()
 export class AppService {
+  /**
+   * CalculateByteConversion 字节转换函数
+   * @param num 要转换的字节数
+   * @param Bytecodes 转换的单位 KB MB GB
+   * @returns 转换后的数值
+   */
   private CalculateByteConversion: (num: number, Bytecodes?: string) => number;
   private UploadFile: (file: string, data: Array<number>) => string;
   num: number;
   constructor() {
-    this.CalculateByteConversion = function (num: number, Bytecodes?: string) {
-      let strNuber = 0;
-      switch (Bytecodes) {
-        case 'KB':
-          strNuber = Math.round((num / 1024) * 100) / 100;
-          break;
-        case 'MB':
-          strNuber = Math.round((num / 1024 / 1024) * 100) / 100;
-          break;
-        case 'GB':
-          strNuber = Math.round((num / 1024 / 1024 / 1024) * 100) / 100;
-          break;
-        default:
-          strNuber = Math.round((num / 1024 / 1024 / 1024) * 100) / 100;
-          break;
+    /**
+     * CalculateByteConversion 字节转换函数
+     * @param num 要转换的字节数
+     * @param Bytecodes 转换的单位 KB MB GB
+     * @returns 转换后的数值
+     */
+    this.CalculateByteConversion = function (
+      num: number,
+      Bytecodes: string = 'MB',
+    ) {
+      const byteMap = {
+        KB: 1024,
+        MB: 1024 * 1024,
+        GB: 1024 * 1024 * 1024,
+      };
+
+      const byte = byteMap[Bytecodes];
+
+      if (!byte) {
+        throw new Error(`wrong Bytecodes(未知的字节码): ${Bytecodes}`);
       }
-      return strNuber;
+      if (num < 0) {
+        throw new Error(`wrong num(字节数不能为负数): ${num}`);
+      }
+
+      return Math.round((num / byte) * 100) / 100;
     };
 
     this.UploadFile = function (utl: string, data: Array<number>) {
@@ -44,13 +59,12 @@ export class AppService {
         } catch (err) {
           console.log('文件夹创建失败', err);
         }
-      } 
-      
+      }
+
       console.log(data);
       return '文件夹创建成功';
     };
     this.num = 0;
-
   }
 
   getHello(): string {
@@ -59,6 +73,104 @@ export class AppService {
   }
 
   getSystemResource(option: Parameter): SystemResource {
+    // 资源监视系统
+    class ResourceMonitor {
+      cpuMeasure: any;
+      constructor() {
+        this.cpuMeasure = null;
+      }
+
+      getCpuUsage() {
+        const cpus = os.cpus();
+        let totalIdle = 0,
+          totalTick = 0;
+
+        cpus.forEach((cpu) => {
+          for (let type in cpu.times) {
+            totalTick += cpu.times[type];
+          }
+          totalIdle += cpu.times.idle;
+        });
+
+        return {
+          idle: totalIdle / cpus.length,
+          total: totalTick / cpus.length,
+        };
+      }
+
+      calculateCpuUsage(startMeasure, endMeasure) {
+        const idleDifference = endMeasure.idle - startMeasure.idle;
+        const totalDifference = endMeasure.total - startMeasure.total;
+        const percentageCPU =
+          100 - ~~((100 * idleDifference) / totalDifference);
+        return percentageCPU;
+      }
+
+      getMemoryUsage() {
+        const freeMem = os.freemem();
+        const totalMem = os.totalmem();
+        const usedMem = totalMem - freeMem;
+        const memoryUsage = (usedMem / totalMem) * 100;
+
+        return {
+          free: freeMem,
+          total: totalMem,
+          used: usedMem,
+          usage: memoryUsage,
+        };
+      }
+
+      getDiskUsage(path) {
+        return new Promise((resolve, reject) => {
+          fs.statfs(path, (err, stats) => {
+            if (err) {
+              reject(err);
+            } else {
+              const totalSize = stats.blocks * stats.bsize;
+              const freeSize = stats.bfree * stats.bsize;;
+              const usedSize = totalSize - freeSize;
+              const diskUsage = (usedSize / totalSize) * 100;
+
+              resolve({
+                total: totalSize,
+                free: freeSize,
+                used: usedSize,
+                usage: diskUsage,
+              });
+            }
+          });
+        });
+      }
+
+      startMonitoring() {
+        setInterval(() => {
+          const startMeasure = this.getCpuUsage();
+          setTimeout(() => {
+            const endMeasure = this.getCpuUsage();
+            const cpuUsage = this.calculateCpuUsage(startMeasure, endMeasure);
+            console.log(`CPU使用率：${cpuUsage}%`);
+          }, 1000);
+
+          const memory = this.getMemoryUsage();
+          console.log(`内存使用率：${memory.usage.toFixed(2)}%`);
+
+          const diskPath = os.platform() === 'win32' ? 'C:' : '/';
+          this.getDiskUsage(diskPath)
+            .then((disk) => {
+              console.log(`磁盘使用率：${(disk as {usage: number}).usage.toFixed(2)}%`);
+            })
+            .catch((err) => {
+              console.error('获取磁盘信息失败:', err);
+            });
+        }, 1000);
+      }
+    }
+
+    const monitor = new ResourceMonitor();
+    monitor.startMonitoring();
+
+    new ResourceMonitor();
+
     const _cpus = os.cpus();
     /** 获取系统可用内存 */
     const _memory = os.freemem();
@@ -85,7 +197,7 @@ export class AppService {
         total: totalTick / cpuInfo.length,
       };
     }
-/*
+    /*
     // 每秒获取一次 CPU 使用率
     setInterval(() => {
       const startMeasure = getCpuUsage(); // 获取起始时的 CPU 使用率
@@ -166,7 +278,7 @@ export class AppService {
       ddaa12: os.type(),
       xzaa13: os.uptime(),
       iyda14: os.userInfo(),
-      ...os
+      ...os,
       // sdas15: os.availableParallelism(),
       // udaa16: os.machine(),
       // sdfa17: os.getPriority(4504),
@@ -174,19 +286,30 @@ export class AppService {
   }
 
   uploadFile(files: Array<Express.Multer.File>): string {
-    console.log(files)
-    files.forEach((ele) => {
-      this.num++;
-      let oldfFile = `./upload/${this.num}.vcd`;
-      try {
-        fs.mkdirSync('./upload');
-      } catch (err) {}
-      fs.writeFile(oldfFile, ele.buffer, (err) => {
-        if (err) {
-          return '文件上传失败';
-        }
-      });
-    });
+    console.log(files);
+    files
+      ? files?.forEach((ele) => {
+          this.num++;
+          // let oldfFile = `./upload/${this.num}.vcd`;
+          let oldfFile = `./upload/${ele.originalname}`;
+          try {
+            fs.mkdirSync('./upload');
+          } catch (err) {}
+          fs.writeFile(oldfFile, ele.buffer, (err) => {
+            if (err) {
+              return '文件上传失败';
+            }
+          });
+          // this.getUserAudio(oldfFile);
+          fs.readFile(oldfFile, (err, data) => {
+            if (err) {
+              console.log(err);
+            } else {
+              console.log(' 文件数据', data);
+            }
+          });
+        })
+      : '错误';
 
     return '文件上传成功';
   }

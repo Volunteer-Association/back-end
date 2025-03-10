@@ -1,5 +1,5 @@
 <template>
-    <el-container class="layout-container-demo" style="height: 500px">
+    <el-container class="layout-container-demo" style="height: 100vh">
       <el-aside width="200px">
         <el-scrollbar>
           <el-menu :default-openeds="['1', '3']">
