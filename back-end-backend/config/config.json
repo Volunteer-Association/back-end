@@ -1,0 +1,40 @@
+{
+  "serverOptions": {
+    "host": "",
+    "port": 3000,
+    "baseUrl": ""
+  },
+  "swaggerConfig": {
+
+  },
+  "ThirdPartyAuthorization": {
+    "Gitee": {
+      "ClientID": "",
+      "ClientSecret": ""
+    },
+    "Github": {
+      "ClientID": "",
+      "ClientSecret": ""
+    }
+  },
+  "mysqlOptions": {
+    "database": "",
+    "username": "",
+    "password": "",
+    "host": "",
+    "port": "",
+    "dialect": "",
+    "timezone": "",
+    "underscored": true
+  },
+  "emailOptions": {
+    "host": "",
+    "port": 465,
+    "secure": true,
+    "user": "",
+    "pass": "",
+    "expires": 56000
+  },
+  "hostOptions": [],
+  "nickNameOptions": []
+}
