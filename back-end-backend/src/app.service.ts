@@ -9,6 +9,7 @@
 import { Injectable } from '@nestjs/common';
 import * as os from 'node:os';
 import * as fs from 'node:fs';
+import * as https from 'node:https';
 import { Parameter, SystemResource } from './create-app.dto';
 
 @Injectable()
@@ -61,14 +62,88 @@ export class AppService {
         }
       }
 
-      console.log(data);
+      // console.log(data);
       return '文件夹创建成功';
     };
     this.num = 0;
   }
 
   getHello(): string {
-    this.UploadFile('./upload', [1]);
+    const _txt = this.UploadFile('./upload', [1]);
+
+    function getCpuGithhub() {
+      try {
+        const req = https.request(
+          {
+            hostname: 'www.baidu.com',
+            path: '/',
+            method: 'GET',
+            headers: {
+              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36',
+            },
+          },
+          (res) => {
+            let data = '';
+            res.on('data', (chunk) => {
+              data += chunk;
+            });
+            res.on('end', () => {
+              fs.writeFile('github.html', data, (err) => {  
+                if (err) {  
+                  console.log('写入失败', err);  
+                } else {  
+                  console.log('写入成功');  
+                }  
+              });
+            });
+          },
+        );
+        req.on('error', (err) => {
+          console.log('Error: ' + err);
+          console.log('Error: ' + err.message);
+        });
+        req.end();
+      } catch (error) {
+        if (error.code === 'ECONNRESET') {
+          console.log('连接被重置');
+          getCpuGithhub();
+          // 重试连接
+        } else if (error.code === 'ECONNREFUSED') {
+          console.log('连接被拒绝');
+          getCpuGithhub();
+          // 重试连接
+        } else if (error.code === 'ETIMEDOUT') {
+          console.log('连接超时');
+          getCpuGithhub();
+          // 重试连接
+        } else if (error.code === 'ENOTFOUND') {
+          console.log('域名解析失败');
+          getCpuGithhub();
+          // 重试连接
+        } else {
+          console.log('其他错误', error);
+        }
+      }
+    }
+
+    getCpuGithhub();
+
+    const _getUser = https
+      .get('https://www.github.com', (res) => {
+        let data = '';
+        res.on('data', (chunk) => {
+          data += chunk;
+        });
+        res.on('end', () => {
+          console.log(data);
+        });
+      })
+      .on('error', (err) => {
+        console.log('Error: ' + err);
+        console.log('Error: ' + err.message);
+      });
+
+    console.log(_txt);
     return 'Hello World!';
   }
 
@@ -127,7 +202,7 @@ export class AppService {
               reject(err);
             } else {
               const totalSize = stats.blocks * stats.bsize;
-              const freeSize = stats.bfree * stats.bsize;;
+              const freeSize = stats.bfree * stats.bsize;
               const usedSize = totalSize - freeSize;
               const diskUsage = (usedSize / totalSize) * 100;
 
@@ -157,7 +232,9 @@ export class AppService {
           const diskPath = os.platform() === 'win32' ? 'C:' : '/';
           this.getDiskUsage(diskPath)
             .then((disk) => {
-              console.log(`磁盘使用率：${(disk as {usage: number}).usage.toFixed(2)}%`);
+              console.log(
+                `磁盘使用率：${(disk as { usage: number }).usage.toFixed(2)}%`,
+              );
             })
             .catch((err) => {
               console.error('获取磁盘信息失败:', err);

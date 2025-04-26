@@ -15,7 +15,6 @@
 import { onMounted } from 'vue';
 import teseai from '../assets/images/aitext.jpg';
 import * as TF from '@tensorflow/tfjs'
-import { NumberController } from 'three/examples/jsm/libs/lil-gui.module.min.js';
 
 function careTalk() {
     const model = TF.sequential();
@@ -97,7 +96,7 @@ class LinearModel {
             loss: 'meanSquaredError',
         });
 
-        this.model.fit(TF.tensor2d(xy), TF.tensor2d(ys), {
+        this.model.fit(TF.tensor2d([2]), TF.tensor2d([4]), {
             epochs: 1000,
             batchSize: 32,
         })
@@ -131,11 +130,13 @@ onMounted(() => {
     linearModel.loadModel([1, 2, 3, 4, 5], [1, 2, 3, 4, 5]);
     console.log(linearModel.predict([10]));
     linearModel.save();
-    // linearModel.save();
-    // TFJS();
-    // careTalk();
 })
 
 </script>
 
-<style lang="css"></style>
+<style lang="css">
+body {
+    background-color: white;
+}
+
+</style>

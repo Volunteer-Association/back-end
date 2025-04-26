@@ -18,7 +18,9 @@ async function bootstrap() {
     logger: ['error', 'debug', 'log', 'warn'],
   });
   // 配置cors
-  app.enableCors();
+  app.enableCors({
+    origin: Config.serverOptions.origin,
+  });
   // 配置静态资源
   app.useStaticAssets(join(__dirname, '..', 'public'), {
     prefix: Config.serverOptions.baseUrl,

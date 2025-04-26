@@ -24,6 +24,7 @@ const Config = {
     port: 3000,
     ports: 3001,
     baseUrl: '/static/file',
+    origin: ' ',
   },
   swaggerConfig: {},
   /** 第三方授权 */

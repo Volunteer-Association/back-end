@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <button onclick="getLocation()">获取我的位置</button>
+  <p id="demo"></p>
+  
+  <script>
+
+
+navigator.geolocation.getCurrentPosition(showPosition, showError, {
+  enableHighAccuracy: true, // 尝试获取更精确的位置
+  timeout: 5000,           // 超时时间(毫秒)
+  maximumAge: 0            // 缓存位置的最大年龄(毫秒)
+});
+
+
+const watchId = navigator.geolocation.watchPosition(
+  (position) => {
+    console.log("位置变化:", position.coords.latitude, position.coords.longitude);
+  }
+);
+
+// 停止监听
+// navigator.geolocation.clearWatch(watchId);
+
+
+
+    // 检查浏览器是否支持地理定位API
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+      } else {
+        document.getElementById("demo").innerHTML = "您的浏览器不支持地理定位";
+      }
+    }
+    
+    function showPosition(position) {
+      document.getElementById("demo").innerHTML = 
+        "纬度: " + position.coords.latitude + "<br>" +
+        "经度: " + position.coords.longitude;
+    }
+    
+    function showError(error) {
+      let message = "";
+      switch(error.code) {
+        case error.PERMISSION_DENIED:
+          message = "用户拒绝了位置请求";
+          break;
+        case error.POSITION_UNAVAILABLE:
+          message = "位置信息不可用";
+          break;
+        case error.TIMEOUT:
+          message = "获取位置超时";
+          break;
+        case error.UNKNOWN_ERROR:
+          message = "发生未知错误";
+          break;
+      }
+      document.getElementById("demo").innerHTML = message;
+    }
+  </script>
+</body>
+</html>

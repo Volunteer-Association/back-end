@@ -93,6 +93,8 @@
   <script lang="ts" setup>
   import { ref } from 'vue'
   import { Menu as IconMenu, Message, Setting } from '@element-plus/icons-vue'
+  import Utils from '@/utils/utils'
+
   
   const item = {
     date: '2016-05-02',
@@ -100,6 +102,14 @@
     address: 'No. 189, Grove St, Los Angeles',
   }
   const tableData = ref(Array.from({ length: 20 }).fill(item))
+
+  const message =  new Utils
+  message.getCurrentPosition({ enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }).then(position => {
+    console.log('Current position:', position)
+  }).catch(error => {
+    console.error('Error getting current position:', error)
+  })
+
   </script>
   
   <style scoped>
