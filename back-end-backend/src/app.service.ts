@@ -126,7 +126,7 @@ export class AppService {
       }
     }
 
-    getCpuGithhub();
+    // getCpuGithhub();
 
     const _getUser = https
       .get('https://www.github.com', (res) => {
@@ -363,30 +363,36 @@ export class AppService {
   }
 
   uploadFile(files: Array<Express.Multer.File>): string {
-    console.log(files);
-    files
-      ? files?.forEach((ele) => {
-          this.num++;
-          // let oldfFile = `./upload/${this.num}.vcd`;
-          let oldfFile = `./upload/${ele.originalname}`;
-          try {
-            fs.mkdirSync('./upload');
-          } catch (err) {}
-          fs.writeFile(oldfFile, ele.buffer, (err) => {
-            if (err) {
-              return '文件上传失败';
-            }
-          });
-          // this.getUserAudio(oldfFile);
-          fs.readFile(oldfFile, (err, data) => {
-            if (err) {
-              console.log(err);
-            } else {
-              console.log(' 文件数据', data);
-            }
-          });
-        })
-      : '错误';
+    // console.log(files);
+
+    // 获取文件名和文件类型
+    // const { originalname, mimetype } = files.map((file) => {return file.originalname, file.mimetype});
+
+
+
+    // files
+    //   ? files?.forEach((ele) => {
+    //       this.num++;
+    //       // let oldfFile = `./upload/${this.num}.vcd`;
+    //       let oldfFile = `./upload/${ele.originalname}`;
+    //       try {
+    //         fs.mkdirSync('./upload');
+    //       } catch (err) {}
+    //       fs.writeFile(oldfFile, ele.buffer, (err) => {
+    //         if (err) {
+    //           return '文件上传失败';
+    //         }
+    //       });
+    //       // this.getUserAudio(oldfFile);
+    //       fs.readFile(oldfFile, (err, data) => {
+    //         if (err) {
+    //           console.log(err);
+    //         } else {
+    //           console.log(' 文件数据', data);
+    //         }
+    //       });
+    //     })
+    //   : '错误';
 
     return '文件上传成功';
   }

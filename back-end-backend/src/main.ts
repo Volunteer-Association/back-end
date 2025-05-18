@@ -19,7 +19,7 @@ async function bootstrap() {
   });
   // 配置cors
   app.enableCors({
-    origin: Config.serverOptions.origin,
+    origin: Config.hostOptions,
   });
   // 配置静态资源
   app.useStaticAssets(join(__dirname, '..', 'public'), {

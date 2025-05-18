@@ -1,7 +1,7 @@
 {
   "serverOptions": {
     "host": "",
-    "port": 3000,
+    "port": 3001,
     "baseUrl": ""
   },
   "swaggerConfig": {

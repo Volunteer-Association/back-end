@@ -21,8 +21,8 @@ const Config = {
     host: `http://${getIP}`,
     hosta: `https://${getIP}`,
     hostIP: `${getIP}`,
-    port: 3000,
-    ports: 3001,
+    port: 3001,
+    ports: 3002,
     baseUrl: '/static/file',
     origin: ' ',
   },
@@ -78,7 +78,7 @@ const Config = {
   },
   /** 请求白名单 */
   hostOptions: [
-    'http://localhost:8000',
+    'http://localhost:3000',
     'http://localhost:8080',
     'http://127.0.0.1:3000',
     `http://${getIP}:3000`,
