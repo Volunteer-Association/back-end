@@ -21,6 +21,12 @@ export class AppService {
    * @returns 转换后的数值
    */
   private CalculateByteConversion: (num: number, Bytecodes?: string) => number;
+  /**
+   * UploadFile 文件上传函数
+   * @param file 上传的文件路径
+   * @param data 上传的文件内容
+   * @returns 上传成功的文件路径
+   */
   private UploadFile: (file: string, data: Array<number>) => string;
   num: number;
   constructor() {
@@ -35,6 +41,9 @@ export class AppService {
       Bytecodes: string = 'MB',
     ) {
       const byteMap = {
+        kb: 1024,
+        mb: 1024 * 1024,
+        gb: 1024 * 1024 * 1024,
         KB: 1024,
         MB: 1024 * 1024,
         GB: 1024 * 1024 * 1024,
@@ -146,8 +155,14 @@ export class AppService {
     console.log(_txt);
     return 'Hello World!';
   }
-
-  getSystemResource(option: Parameter): SystemResource {
+  /**
+   * 获取系统资源信息
+   * @param option 参数
+   * @param option.id 资源id
+   * @param option.memory 内存单位 KB MB GB
+   * @returns 
+   */
+  getSystemResource(option: Parameter): SystemResource<string> {
     // 资源监视系统
     class ResourceMonitor {
       cpuMeasure: any;
@@ -243,10 +258,10 @@ export class AppService {
       }
     }
 
-    const monitor = new ResourceMonitor();
-    monitor.startMonitoring();
+    // const monitor = new ResourceMonitor();
+    // monitor.startMonitoring();
 
-    new ResourceMonitor();
+    // new ResourceMonitor();
 
     const _cpus = os.cpus();
     /** 获取系统可用内存 */
@@ -274,65 +289,6 @@ export class AppService {
         total: totalTick / cpuInfo.length,
       };
     }
-    /*
-    // 每秒获取一次 CPU 使用率
-    setInterval(() => {
-      const startMeasure = getCpuUsage(); // 获取起始时的 CPU 使用率
-
-      setTimeout(() => {
-        const endMeasure = getCpuUsage(); // 获取结束时的 CPU 使用率
-        const idleDifference = endMeasure.idle - startMeasure.idle; // 空闲周期数差值
-        const totalDifference = endMeasure.total - startMeasure.total; // 总周期数差值
-        const percentageCPU =
-          100 - ~~((100 * idleDifference) / totalDifference); // CPU 使用率百分比
-
-        console.log(endMeasure)
-
-        console.log(idleDifference, totalDifference);
-        console.log(`CPU使用率：${percentageCPU}%`); // 打印 CPU 使用率
-      }, 1000); // 设置1秒的延迟
-    }, 1000); // 每秒执行一次*/
-
-    console.log(option);
-
-    // const disks = os.platform() === 'win32' ? ['C:'] : ['/'];
-    // disks.forEach((disk) => {
-    //   fs.stat(disk, (err, status: any) => {
-    //     if (err) {
-    //       console.error(`Failed to get disk information for ${disk}: ${err}`);
-    //       // console.log(disk)
-    //     } else {
-    //       const totalSize = status.size;
-    //       const freeSize = status?.available;
-    //       console.log(`Disk: ${disk}`);
-    //       console.log(`Total Size: ${totalSize} bytes`);
-    //       console.log(`Free Size: ${freeSize} bytes`);
-    //     }
-    //   });
-    // });
-    /*
-    const cmdOrder = {
-      getAllDrive: () => 'logicdisk',
-      getOnerDriveName: (drive: string) => `wmic${drive}`,
-    };
-
-    async function getAllDrive(): Promise<string[]> {
-      let result: string[] = [];
-      let promise = new Promise((resolve, reject) => {
-        process.exec(cmdOrder.getAllDrive(), (err, stdour) => {
-          if (err !== null) {
-            console.log(err);
-            return;
-          }
-          let stdoutArr = [...stdour];
-          stdoutArr.forEach((v: string, i: number) => {
-            if (v === ':') {
-            }
-          });
-        });
-      });
-      return result;
-    }*/
 
     return {
       cpu: _cpus,
@@ -341,20 +297,20 @@ export class AppService {
         usedSize: this.CalculateByteConversion(_usedMemory, option?.memory),
         veSize: this.CalculateByteConversion(_memorys, option?.memory),
       },
-      osnd1: os.arch(),
-      ddf2: os.EOL,
-      ada3: os.constants,
-      udnd4: os.endianness(),
-      zsd5: os.homedir(),
-      asw6: os.hostname(),
-      asiw7: os.loadavg(),
-      yea8: os.networkInterfaces(),
-      ienc9: os.platform(),
-      seus10: os.release(),
-      caes11: os.tmpdir(),
-      ddaa12: os.type(),
-      xzaa13: os.uptime(),
-      iyda14: os.userInfo(),
+      arch: os.arch(),
+      EOL: os.EOL,
+      constants: os.constants,
+      endianness: os.endianness(),
+      homedir: os.homedir(),
+      hostname: os.hostname(),
+      loadavg: os.loadavg(),
+      networkInterfaces: os.networkInterfaces(),
+      platform: os.platform(),
+      release: os.release(),
+      tmpdir: os.tmpdir(),
+      type: os.type(),
+      uptime: os.uptime(),
+      userInfo: os.userInfo(),
       ...os,
       // sdas15: os.availableParallelism(),
       // udaa16: os.machine(),

@@ -12,8 +12,6 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import Connect from '../mysql/connect';
 import { DemoModule } from './demo/demo.module';
-import { LoginModule } from './auth/login/login.module';
-import { RegisterModule } from './auth/register/register.module';
 
 @Module({
   imports: [
@@ -23,8 +21,6 @@ import { RegisterModule } from './auth/register/register.module';
     }),
     Connect,
     DemoModule,
-    LoginModule,
-    RegisterModule,
   ],
   controllers: [AppController],
   providers: [AppService],

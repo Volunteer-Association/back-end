@@ -13,37 +13,34 @@ import 'Multer';
 export class CreateAppDto {}
 
 export class Parameter {
-  @ApiProperty({ required: false, default: ''})
+  @ApiProperty({ required: false, default: 'id'})
   id?: string;
 
-  @ApiProperty({ required: false, default: ''})
+  @ApiProperty({ required: false, default: '字节码'})
   memory?: string;
 }
 
-export class SystemResource {
+export class SystemResource<T> {
   cpu: os.CpuInfo[];
   memory: {
     size: number;
     usedSize: number;
     veSize: number;
   };
-  osnd1: string;
-  ddf2: string;
-  ada3: any;
-  udnd4: string;
-  zsd5: string;
-  asw6: string;
-  asiw7: number[];
-  yea8: NodeJS.Dict<os.NetworkInterfaceInfo[]>;
-  ienc9: string;
-  seus10: string;
-  caes11: string;
-  ddaa12: string;
-  xzaa13: number;
-  iyda14: os.UserInfo<string>;
-  sdas15?: number;
-  udaa16?: string;
-  sdfa17?: number;
+  arch: string;
+  EOL: string;
+  constants: any;
+  endianness: string;
+  homedir: string;
+  hostname: string;
+  loadavg: number[];
+  networkInterfaces: NodeJS.Dict<os.NetworkInterfaceInfo[]>;
+  platform: string;
+  release: string;
+  tmpdir: string;
+  type: string;
+  uptime: number;
+  userInfo: os.UserInfo<string>;
 }
 
 export class FilesUploadDto {
