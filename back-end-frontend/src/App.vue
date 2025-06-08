@@ -1,7 +1,18 @@
 <script setup lang="ts">
-import { RouterView } from 'vue-router'
+import { RouterView, useRoute } from 'vue-router'
 import { ref } from 'vue'
 import { Menu as IconMenu, Message, Setting } from '@element-plus/icons-vue'
+
+
+// 获取当前路由
+const route = useRoute();
+// 权限渲染
+const isShow = ref(false);
+if (route.fullPath === '/web3d') {
+  isShow.value = true;
+} else {
+  isShow.value = false;
+}
 
 const item = {
   date: '2016-05-02',
@@ -9,11 +20,11 @@ const item = {
   address: 'No. 189, Grove St, Los Angeles',
 }
 const tableData = ref(Array.from({ length: 20 }).fill(item))
-console.info(tableData)
+// console.info(tableData)
 </script>
 
 <template>
-  <div class="header">
+  <div class="header" v-if="isShow">
     <nav class="nav">
       <a href="/upload">文件上传接口</a>
     </nav>

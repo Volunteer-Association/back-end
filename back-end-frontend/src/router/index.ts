@@ -28,6 +28,11 @@ const router = createRouter({
       component: () => import('../views/TextView.vue')
     },
     {
+      path: '/web3d',
+      name: 'three',
+      component: () => import('../views/ThreeView.vue')
+    },
+    {
       path: '/aidemo',
       name: 'aidemo',
       component: () => import('../views/AIdemoView.vue')

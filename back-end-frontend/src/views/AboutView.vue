@@ -22,7 +22,7 @@
 
 <script setup lang="ts">
 import { onMounted } from 'vue';
-import axios from 'axios';
+// import axios from 'axios';
 
 onMounted(() => {
   console.log('About page mounted');
@@ -30,29 +30,6 @@ onMounted(() => {
 
 function handleClick() {
   console.log('About page clicked');
-
-  axios({
-    method: 'get',
-    url: 'http://192.168.69.142:3000',
-    headers: {
-      // 'Content-Type': 'application/json',
-      'Authorization': 'Bearer 2256+45156545'
-    },
-    withCredentials: false,
-    crossDomain: true,
-    responseType: 'json',
-    timeout: 10000,
-    data: {
-      name: 'John',
-      age: 30
-    }
-  })
-    .then((response) => {
-      console.log(response.data);
-    })
-    .catch((error) => {
-      console.error('Error fetching data:', error);
-    });
 
 }
 
