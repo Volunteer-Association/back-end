@@ -17,6 +17,7 @@ import {
   Req,
   Session,
   Headers,
+  Put,
 } from '@nestjs/common';
 import { AppService } from './app.service';
 import {
@@ -38,7 +39,7 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  getHello(@Ip() ip: string, @Session() session: any, @Headers() userAgent: string, @Req() req: any): string {
+  getHello(@Ip() ip: string, @Session() session: any, @Headers() userAgent: string, @Req() req: ReturnType<unknown>): string {
     console.log(ip);
     // console.log(session);
     // console.log(userAgent);
@@ -53,7 +54,7 @@ export class AppController {
     type: Parameter,
     name: '参数'
   })
-  getSystemResource(@Query() option: Parameter): SystemResource {
+  getSystemResource(@Query() option: Parameter): SystemResource<any> {
     return this.appService.getSystemResource(option);
   }
 
@@ -74,4 +75,20 @@ export class AppController {
   getUserAudio(@Query() value: string): string {
     return this.appService.getUserAudio(value)
   }
+
+  @Put("/audio")
+  updateUserAudio(@Query() value: Tunnd<string>): string {
+    return this.appService.updateUserAudio(value)
+  }
 }
+
+// 
+
+type Tunnd<T> = T extends { [key: string]: infer U } ? U : never;
+
+type IsString<T> = T extends string ? true : false;
+
+type ReturnType<T> = T extends (...args: any[]) => infer R ? R : any;
+
+
+type EventName = `on${string}`;

@@ -8,6 +8,7 @@
  */
 // 导入os模块
 import * as os from 'node:os';
+import fs from 'fs';
 // 获取IP
 const IP = os.networkInterfaces();
 // 调用获取IP函数
@@ -148,5 +149,53 @@ function getosIP(): string {
     return '127.0.0.1';
   }
 }
+
+fs.readFile('config.json', 'utf8', (err, data) => {
+  if (err) {
+    console.error('config.json文件读取失败！', err);
+    throw err;
+  } else {
+    console.log('config.json文件读取成功！');
+    const config = JSON.parse(data);
+    // 合并配置
+    Config.serverOptions = {
+      ...Config.serverOptions,
+      ...config.serverOptions,
+    };
+    Config.swaggerConfig = {
+      ...Config.swaggerConfig,
+      ...config.swaggerConfig,
+    };
+    Config.ThirdPartyAuthorization = {
+      ...Config.ThirdPartyAuthorization,
+      ...config.ThirdPartyAuthorization,
+    };
+    Config.mysqlOptions = {
+      ...Config.mysqlOptions,
+      ...config.mysqlOptions,
+    };
+    Config.emailOptions = {
+      ...Config.emailOptions,
+      ...config.emailOptions,
+    };
+    Config.hostOptions = [
+      ...Config.hostOptions,
+      ...config.hostOptions,
+    ];
+    Config.nickNameOptions = [
+      ...Config.nickNameOptions,
+      ...config.nickNameOptions,
+    ];
+  }
+});
+
+fs.writeFile('config.json', JSON.stringify(Config, null, 2), 'utf8', (err) => {
+  if (err) {
+    console.error('config.json文件写入失败！', err);
+    throw err;
+  } else {
+    console.log('config.json文件写入成功！');
+  }
+})
 
 export default Config;

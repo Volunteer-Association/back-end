@@ -27,20 +27,20 @@ export class SystemResource<T> {
     usedSize: number;
     veSize: number;
   };
-  arch: string;
+  arch: T;
   EOL: string;
-  constants: any;
-  endianness: string;
-  homedir: string;
-  hostname: string;
-  loadavg: number[];
-  networkInterfaces: NodeJS.Dict<os.NetworkInterfaceInfo[]>;
-  platform: string;
-  release: string;
-  tmpdir: string;
-  type: string;
-  uptime: number;
-  userInfo: os.UserInfo<string>;
+  constants: T;
+  endianness: T;
+  homedir: T;
+  hostname: T;
+  loadavg: T;
+  networkInterfaces: T;
+  platform: T;
+  release: T;
+  tmpdir: T;
+  type: T;
+  uptime: T;
+  userInfo: T;
 }
 
 export class FilesUploadDto {

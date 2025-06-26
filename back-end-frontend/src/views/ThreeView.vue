@@ -16,7 +16,7 @@ const camera = new THREE.PerspectiveCamera(
     0.1,
     1000
 )
-const renderer = new THREE.WebGLRenderer({ antialias: true })
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
 let controls: OrbitControls
 let animationId: number
 
@@ -58,7 +58,7 @@ const animate = () => {
 const onWindowResize = () => {
     if (!canvasContainer.value) return
 
-    camera.aspect = canvasContainer.value.clientWidth / canvasContainer.value.clientHeight
+    camera.aspect = canvasContainer.value.clientWidth / canvasContainer.value.clientHeight;
     camera.updateProjectionMatrix()
     renderer.setSize(canvasContainer.value.clientWidth, canvasContainer.value.clientHeight)
 }
@@ -104,8 +104,13 @@ body {
 
 .three-container {
     width: 100%;
-    height: 100%;
-    position: relative;
+    height: 100vh;
+    overflow: hidden; 
+    /** 解决画布不居中 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* position: relative; */
 }
 .three-container canvas {
     display: block;

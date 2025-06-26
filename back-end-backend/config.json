@@ -1,0 +1,65 @@
+{
+  "serverOptions": {
+    "host": "http://192.168.106.142",
+    "hosta": "https://192.168.106.142",
+    "hostIP": "192.168.106.142",
+    "port": 3001,
+    "ports": 3002,
+    "baseUrl": "/static/file",
+    "origin": " "
+  },
+  "swaggerConfig": {},
+  "ThirdPartyAuthorization": {
+    "Gitee": {
+      "ClientID": "",
+      "ClientSecret": ""
+    },
+    "Github": {
+      "ClientID": "",
+      "ClientSecret": ""
+    }
+  },
+  "mysqlOptions": {
+    "database": "back_end",
+    "username": "lenovo",
+    "password": "chenguihui",
+    "host": "localhost",
+    "port": 3306,
+    "dialect": "mysql",
+    "timezone": "+08:00",
+    "underscored": true
+  },
+  "emailOptions": {
+    "host": "smtp.qq.com",
+    "port": 465,
+    "secure": true,
+    "user": "shaft.feather@foxmail.com",
+    "pass": "",
+    "expires": 300000
+  },
+  "hostOptions": [
+    "http://localhost:3000",
+    "http://localhost:8080",
+    "http://127.0.0.1:3000",
+    "http://192.168.106.142:3000",
+    "http://47.107.59.67",
+    "http://127.0.0.1:5500",
+    "http://chenguihui.com",
+    "https://chenguihui.com",
+    "http://www.chenguihui.com",
+    "https://www.chenguihui.com"
+  ],
+  "nickNameOptions": [
+    "彩虹",
+    "白云",
+    "森林",
+    "蓝天",
+    "大海",
+    "领悟",
+    "实诚",
+    "飞鸟",
+    "老鹰",
+    "白兔",
+    "绿竹"
+  ]
+}

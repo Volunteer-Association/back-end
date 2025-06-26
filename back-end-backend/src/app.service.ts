@@ -14,6 +14,9 @@ import { Parameter, SystemResource } from './create-app.dto';
 
 @Injectable()
 export class AppService {
+  updateUserAudio(value: string): string {
+    throw new Error('Method not implemented.');
+  }
   /**
    * CalculateByteConversion 字节转换函数
    * @param num 要转换的字节数
@@ -162,7 +165,7 @@ export class AppService {
    * @param option.memory 内存单位 KB MB GB
    * @returns 
    */
-  getSystemResource(option: Parameter): SystemResource<string> {
+  getSystemResource(option: Parameter): any {
     // 资源监视系统
     class ResourceMonitor {
       cpuMeasure: any;
@@ -210,7 +213,7 @@ export class AppService {
         };
       }
 
-      getDiskUsage(path) {
+      getDiskUsage(path: string) {
         return new Promise((resolve, reject) => {
           fs.statfs(path, (err, stats) => {
             if (err) {
@@ -233,6 +236,34 @@ export class AppService {
       }
 
       startMonitoring() {
+        /**
+         * 处理回调函数
+         * @param value 回调值
+         * @param callback 回调函数
+         * @returns void
+         */
+        function registerCallback(callback: (value: string | number) => void) {
+          // 注册回调函数
+          if (typeof callback === 'function') {
+            callback("监控开始");
+            callback(2223);
+          } else {
+            console.error('回调函数必须是一个函数');
+          }
+        }
+
+        /**
+         * 注册回调函数
+         * @param callback 回调函数
+         * @returns void
+         */
+        // 注册回调函数
+        registerCallback((value) => {
+          console.log(value);
+        });
+
+        // 启动监控
+        // 定时器
         setInterval(() => {
           const startMeasure = this.getCpuUsage();
           setTimeout(() => {
