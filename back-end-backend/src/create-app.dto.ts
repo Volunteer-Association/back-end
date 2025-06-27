@@ -13,10 +13,10 @@ import 'Multer';
 export class CreateAppDto {}
 
 export class Parameter {
-  @ApiProperty({ required: false, default: 'id'})
+  @ApiProperty({ required: false, default: ''})
   id?: string;
 
-  @ApiProperty({ required: false, default: '字节码'})
+  @ApiProperty({ required: false, default: 'mb'})
   memory?: string;
 }
 

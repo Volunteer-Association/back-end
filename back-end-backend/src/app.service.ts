@@ -23,7 +23,7 @@ export class AppService {
    * @param Bytecodes 转换的单位 KB MB GB
    * @returns 转换后的数值
    */
-  private CalculateByteConversion: (num: number, Bytecodes?: string) => number;
+  private CalculateByteConversion: (num: number, Bytecodes?: string) => number | string;
   /**
    * UploadFile 文件上传函数
    * @param file 上传的文件路径
@@ -41,7 +41,7 @@ export class AppService {
      */
     this.CalculateByteConversion = function (
       num: number,
-      Bytecodes: string = 'MB',
+      Bytecodes: string = 'MB'
     ) {
       const byteMap = {
         kb: 1024,
@@ -55,9 +55,13 @@ export class AppService {
       const byte = byteMap[Bytecodes];
 
       if (!byte) {
+        // callback(`wrong Bytecodes(未知的字节码): ${Bytecodes}`);
+        return 'wrong Bytecodes(未知的字节码): ' + Bytecodes;
         throw new Error(`wrong Bytecodes(未知的字节码): ${Bytecodes}`);
+
       }
       if (num < 0) {
+        return '字节数不能为负数';
         throw new Error(`wrong num(字节数不能为负数): ${num}`);
       }
 
@@ -289,8 +293,8 @@ export class AppService {
       }
     }
 
-    // const monitor = new ResourceMonitor();
-    // monitor.startMonitoring();
+    const monitor = new ResourceMonitor();
+    monitor.startMonitoring();
 
     // new ResourceMonitor();
 
